@@ -1,0 +1,84 @@
+# Ananya Kalia - Software Developer & AI Engineer Portfolio
+
+Ananya Kalia is an aspiring software developer driven by curiosity and a desire to create real-world impact through technology. Specializes in building systems across web, computer vision, and machine learning domains.
+
+## Metadata & Contact
+- Name: Ananya Kalia
+- Website: https://ananyakalia.com
+- Location: Mumbai, India
+- Role: Co-Curator, Speaker, Developer
+- GitHub: https://github.com/ananyakalia
+- LinkedIn: https://linkedin.com/in/ananyakalia
+
+## Core Tech Ecosystem
+
+### Languages
+- Python
+- Java
+- C++
+- C
+- JavaScript
+- Bash
+
+### Libraries & Frameworks
+- HTML
+- CSS
+- Flask
+- TensorFlow
+- OpenCV
+- MediaPipe
+- NumPy
+
+### Tools & Databases
+- Docker
+- Git
+- SQL
+- MySQL
+- SQLite
+- Figma
+
+### Domains
+- Computer Vision
+- AI/ML
+- Web Development
+- Embedded Systems
+
+## Featured Projects
+
+### IMPROVYU AI Interviewer
+- Award: Winner, Model Forge 2025 ML
+- Description: An advanced computer vision AI that conducts mock interviews. Leverages MediaPipe and OpenCV to evaluate facial postures, speech timing, and response structures in real-time.
+- Tech Stack: Python, OpenCV, MediaPipe, AI/ML, Flask
+- GitHub: https://github.com/ananyakalia/improvyu
+
+### Renewable Site Optimizer
+- Award: Winner, NEXUS Ideathon 2025
+- Description: A GIS and AI-powered web dashboard assessing topological and spatial suitability for wind and solar installations using OpenStreetMap algorithms.
+- Tech Stack: Flask, OpenStreetMap, TensorFlow, NumPy, Figma
+- GitHub: https://github.com/ananyakalia/renewable-site-optimizer
+
+### Fibonacci-Golden Ratio Research
+- Award: Winner, Best Paper MULTICON 2025
+- Description: A mathematical analysis paper assessing structural connections between Golden Ratio divisions and Fibonacci iterations, recognized for analytical insight.
+- Tech Stack: Python, Analytical Modeling, Research, Fibonacci
+- GitHub: https://github.com/ananyakalia/fibonacci-golden-ratio
+
+### C++ & Java Core Systems
+- Award: IIT Bombay FOSSEE Certification
+- Description: Intermediate and advanced implementations of Object-Oriented structures, custom memory allocations, and algorithms. Scoring a verified 92.50%.
+- Tech Stack: C++, Java, Data Structures, OOP, IIT Bombay
+- GitHub: https://github.com/ananyakalia/core-systems-oop
+
+## Experience & Certifications
+
+### Co-Curator @ TEDxTCET (Oct 2024 - Present)
+- Designed and refined speech flows, structural scripts, and visual delivery structures for speakers, ensuring TEDx standards.
+- Engineered digital feedback systems to capture post-event survey data and speaker feedback.
+
+### Event Coordinator @ CSI-TCET (Aug 2024 - Present)
+- Supervised logistics, technical infrastructure, and coordinate teams for multiple collegiate hackathons.
+- Scaled outreach and managed registrations via online developer channels.
+
+### Certifications
+- **IIT Bombay C++ Training** (Scored 92.50%): Completed memory allocation and structural OOP programming patterns.
+- **MongoDB Academy Developer Certifications**: Validated database transaction mechanics, schema configurations, and query operations.
