@@ -41,7 +41,7 @@ import {
 } from "react-icons/si";
 import CurtainLoader from "@/components/CurtainLoader";
 import CircularTestimonials from "@/components/ui/circular-testimonials";
-import { GripVertical } from "lucide-react";
+import { GripVertical, Menu, X } from "lucide-react";
 
 // 3D Tilt Card Component
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -256,6 +256,7 @@ export default function Home() {
   const [curtainsFinished, setCurtainsFinished] = useState(false);
   const [fullscreenLoading, setFullscreenLoading] = useState<{ active: boolean; message: string } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -479,12 +480,12 @@ export default function Home() {
       <CurtainLoader onComplete={() => setCurtainsFinished(true)} />
 
       {/* Ambient background glows (Faint drifting light blobs) */}
-      <div className="glow-blob glow-gold top-[10%] left-[-10%] w-[600px] h-[600px]" />
-      <div className="glow-blob glow-sage top-[28%] right-[-10%] w-[700px] h-[700px]" />
-      <div className="glow-blob glow-sage top-[45%] left-[-15%] w-[650px] h-[650px]" />
-      <div className="glow-blob glow-gold top-[62%] right-[-15%] w-[750px] h-[750px]" />
-      <div className="glow-blob glow-cream top-[78%] left-[-10%] w-[600px] h-[600px]" />
-      <div className="glow-blob glow-sage bottom-[2%] right-[-15%] w-[650px] h-[650px]" />
+      <div className="glow-blob glow-gold top-[10%] left-[-10%] w-[600px] h-[600px] hidden md:block" />
+      <div className="glow-blob glow-sage top-[28%] right-[-10%] w-[700px] h-[700px] hidden md:block" />
+      <div className="glow-blob glow-sage top-[45%] left-[-15%] w-[650px] h-[650px] hidden md:block" />
+      <div className="glow-blob glow-gold top-[62%] right-[-15%] w-[750px] h-[750px] hidden md:block" />
+      <div className="glow-blob glow-cream top-[78%] left-[-10%] w-[600px] h-[600px] hidden md:block" />
+      <div className="glow-blob glow-sage bottom-[2%] right-[-15%] w-[650px] h-[650px] hidden md:block" />
 
       {/* Main content layer */}
       <motion.div
@@ -600,9 +601,95 @@ export default function Home() {
               >
                 Let&apos;s talk
               </a>
+              <button 
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="md:hidden text-[#FAF6EE]/80 hover:text-[#C8B195] text-xl p-1.5 focus:outline-none transition-colors"
+                aria-label="Toggle Menu"
+              >
+                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
             </div>
           </div>
         </header>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <>
+              {/* Backdrop overlay */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMenuOpen(false)}
+                className="fixed inset-0 z-40 bg-[#121816]/70 backdrop-blur-md md:hidden"
+              />
+
+              {/* Slide-out Menu Panel */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", bounce: 0, duration: 0.35 }}
+                className="fixed top-0 right-0 bottom-0 w-[75vw] max-w-[280px] bg-[#1a2220] border-l border-white/5 z-50 p-6 md:hidden flex flex-col justify-between shadow-2xl"
+              >
+                <div className="flex flex-col gap-6">
+                  {/* Menu Header with close button */}
+                  <div className="flex items-center justify-between pb-4 border-b border-white/5">
+                    <span className="font-display text-[10px] font-bold tracking-widest text-[#C8B195] uppercase">
+                      Navigation
+                    </span>
+                    <button
+                      onClick={() => setMenuOpen(false)}
+                      className="text-[#FAF6EE]/80 hover:text-[#C8B195] p-1 transition-colors"
+                      aria-label="Close Menu"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+
+                  {/* Navigation Links */}
+                  <nav className="flex flex-col gap-4 text-[10px] font-bold uppercase tracking-widest text-[#FAF6EE]/70">
+                    <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">About</a>
+                    <a href="#skills" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Skills</a>
+                    <a href="#experience" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Experience</a>
+                    <a href="#projects" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Projects</a>
+                    <a href="#testimonials" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Testimonials</a>
+                    <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors">Contact</a>
+                  </nav>
+                </div>
+
+                {/* Footer actions in menu */}
+                <div className="flex flex-col gap-4 pt-4 border-t border-white/5">
+                  <a
+                    href="#contact"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full py-3 rounded-full bg-[#C8B195] text-[#121816] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center hover:bg-[#FAF6EE]"
+                  >
+                    Let&apos;s talk
+                  </a>
+                  <div className="flex justify-center space-x-6 pt-2">
+                    <a
+                      href="https://github.com/ananyakalia14"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
+                    >
+                      <FaGithub />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
+                    >
+                      <FaLinkedin />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         <main className="flex-grow">
 
@@ -621,7 +708,7 @@ export default function Home() {
               <img 
                 src="/ananya_hero.jpg" 
                 alt="Ananya Kalia - Software Developer & AI Engineer" 
-                className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] h-full object-cover object-right md:object-center border-none outline-none opacity-30 md:opacity-100 transition-opacity duration-500" 
+                className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] h-full object-cover object-right md:object-center border-none outline-none opacity-10 md:opacity-100 transition-opacity duration-500" 
               />
               
               {/* Desktop Horizontal Gradient Overlay — custom precise multi-stop to prevent creases and borders */}
@@ -631,6 +718,9 @@ export default function Home() {
                   background: 'linear-gradient(to right, #121816 0%, #121816 50%, rgba(18,24,22,0.9) 58%, rgba(18,24,22,0.3) 72%, transparent 90%)' 
                 }} 
               />
+              
+              {/* Mobile Solid Dark Overlay wrapper for readability */}
+              <div className="block md:hidden absolute inset-0 z-10 bg-[#121816]/85" />
               
               {/* Mobile Horizontal Gradient Overlay */}
               <div 
@@ -650,7 +740,92 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="max-w-7xl mx-auto w-full flex flex-col justify-start md:justify-between gap-8 sm:gap-16 md:gap-20 min-h-[calc(100vh-176px)] md:h-full relative z-10">
+          {/* Mobile-Only Hero Layout Stack */}
+          <div className="flex md:hidden w-full flex-col items-center justify-center text-center gap-6 relative z-10">
+            {/* 1. Tag Pill */}
+            <div className="w-full flex justify-center items-center pointer-events-none">
+              <span className="text-[9px] font-bold tracking-widest text-[#C8B195] uppercase px-3.5 py-1.5 border border-[#C8B195]/20 rounded-full bg-[#121816]/80 backdrop-blur-md">
+                CO-CURATOR • DEVELOPER
+              </span>
+            </div>
+
+            {/* 2. H1 Typography */}
+            <div className="w-full flex flex-col items-center justify-center text-center pointer-events-none">
+              <h1 
+                style={{ fontSize: 'clamp(3rem, 12vw, 5rem)' }}
+                className="font-display font-black tracking-tighter uppercase leading-[0.9] select-none flex flex-col items-center"
+              >
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C8B195] via-[#FAF6EE] to-[#8FA89B] bg-[length:200%_auto] animate-gradient-text">
+                  ANANYA
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8FA89B] via-[#FAF6EE] to-[#C8B195] -mt-1 bg-[length:200%_auto] animate-gradient-text">
+                  KALIA
+                </span>
+              </h1>
+            </div>
+
+            {/* 3. Portrait Image */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-[80vw] max-w-[320px] aspect-[3/4] rounded-2xl overflow-hidden border border-[#C8B195]/20 shadow-2xl mx-auto"
+            >
+              <img 
+                src="/ananya_hero.jpg" 
+                alt="Ananya Kalia" 
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {/* 4. Stats Card */}
+            <div className="bg-[#1a2220]/95 border border-white/5 rounded-3xl p-6 shadow-2xl grid grid-cols-3 gap-4 w-full">
+              <div className="text-center">
+                <h3 className="text-xl font-bold font-display text-[#C8B195] tracking-tight">10.0</h3>
+                <p className="text-[8px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold mt-1">B.E. CGPA</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold font-display text-[#8FA89B] tracking-tight">3+</h3>
+                <p className="text-[8px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold mt-1">HACK WINS</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold font-display text-[#FAF6EE] tracking-tight">15+</h3>
+                <p className="text-[8px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold mt-1">TECH STACKS</p>
+              </div>
+            </div>
+
+            {/* 5. Design Statement Card */}
+            <div className="w-full bg-[#1a2220]/40 backdrop-blur-lg border border-white/10 rounded-3xl p-6 shadow-2xl flex flex-col gap-4 text-center">
+              <span className="text-[8px] font-bold text-[#8FA89B] uppercase tracking-widest">
+                00 // DESIGN STATEMENT
+              </span>
+              <p className="text-xs text-[#FAF6EE]/80 leading-relaxed font-light font-sans">
+                Aspiring software developer driven by curiosity and a desire to create real-world impact through technology. Experienced in building systems across web, computer vision, and machine learning domains.
+              </p>
+              
+              {/* 6. CTA Buttons (stacked vertically) */}
+              <div className="flex flex-col gap-4 pt-2 w-full">
+                <a 
+                  href="#projects" 
+                  className="w-full min-h-[52px] flex items-center justify-center rounded-full bg-[#C8B195] text-[#121816] hover:bg-[#FAF6EE] hover:text-[#121816] text-[10px] font-bold uppercase tracking-widest transition-all duration-300 shadow-lg"
+                >
+                  View Projects
+                </a>
+                <a 
+                  href="#contact" 
+                  className="w-full min-h-[52px] flex items-center justify-center rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[10px] font-bold uppercase tracking-widest transition-all duration-300 bg-[#1a2220]/20"
+                >
+                  Connect
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop-Only Hero Layout (Hidden on Mobile) */}
+          <div className="hidden md:flex max-w-7xl mx-auto w-full flex-col justify-between gap-8 sm:gap-16 md:gap-20 min-h-[calc(100vh-176px)] md:h-full relative z-10">
             
             {/* Top Track: Tag */}
             <motion.div 
@@ -727,7 +902,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="px-6 py-32 z-10 relative">
+        <section id="about" className="px-6 pt-16 pb-32 md:py-32 z-10 relative">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
               
