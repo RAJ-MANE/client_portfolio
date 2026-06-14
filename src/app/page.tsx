@@ -255,7 +255,15 @@ export default function Home() {
   const [showCurtains, setShowCurtains] = useState(true);
   const [curtainsFinished, setCurtainsFinished] = useState(false);
   const [fullscreenLoading, setFullscreenLoading] = useState<{ active: boolean; message: string } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleRedirect = (e: React.MouseEvent<HTMLAnchorElement>, type: "demo" | "github", url: string) => {
     e.preventDefault();
@@ -605,7 +613,7 @@ export default function Home() {
           <motion.div 
             style={{ 
               scale: heroImageScale, 
-              y: heroImageY,
+              y: isMobile ? 0 : heroImageY,
             }}
             className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden"
           >
@@ -613,7 +621,7 @@ export default function Home() {
               <img 
                 src="/ananya_hero.jpg" 
                 alt="Ananya Kalia - Software Developer & AI Engineer" 
-                className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] h-full object-cover object-center border-none outline-none opacity-30 md:opacity-100 transition-opacity duration-500" 
+                className="absolute right-0 top-0 bottom-0 w-full md:w-[55%] h-full object-cover object-right md:object-center border-none outline-none opacity-30 md:opacity-100 transition-opacity duration-500" 
               />
               
               {/* Desktop Horizontal Gradient Overlay — custom precise multi-stop to prevent creases and borders */}
@@ -642,11 +650,11 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="max-w-7xl mx-auto w-full flex flex-col justify-between gap-12 sm:gap-16 md:gap-20 h-full relative z-10">
+          <div className="max-w-7xl mx-auto w-full flex flex-col justify-start md:justify-between gap-8 sm:gap-16 md:gap-20 min-h-[calc(100vh-160px)] md:h-full relative z-10">
             
             {/* Top Track: Tag */}
             <motion.div 
-              style={{ y: heroTitleY1 }}
+              style={{ y: isMobile ? 0 : heroTitleY1 }}
               className="w-full flex justify-end items-center pointer-events-none"
             >
               <span className="text-[9px] font-bold tracking-widest text-[#C8B195] uppercase px-3.5 py-1.5 border border-[#C8B195]/20 rounded-full bg-[#121816]/80 backdrop-blur-md">
@@ -668,11 +676,11 @@ export default function Home() {
 
             {/* Bottom Track: Narrative & Stats */}
             <motion.div 
-              style={{ y: heroTitleY2 }}
-              className="w-full flex flex-col lg:flex-row justify-between items-stretch lg:items-end gap-6 sm:gap-8 pointer-events-auto"
+              style={{ y: isMobile ? 0 : heroTitleY2 }}
+              className="w-full flex flex-col-reverse lg:flex-row justify-between items-stretch lg:items-end gap-6 sm:gap-8 pointer-events-auto"
             >
               {/* narrative overlay */}
-              <div className="max-w-md bg-[#1a2220]/75 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col gap-4 text-left">
+              <div className="max-w-md bg-[#1a2220]/95 md:bg-[#1a2220]/75 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col gap-4 text-left">
                 <span className="text-[8px] font-bold text-[#8FA89B] uppercase tracking-widest">
                   00 // DESIGN STATEMENT
                 </span>
@@ -682,14 +690,14 @@ export default function Home() {
                 <div className="flex gap-3 pt-2">
                   <a 
                     href="#projects" 
-                    className="px-6 py-3 rounded-full bg-[#C8B195] text-[#121816] hover:bg-[#FAF6EE] hover:text-[#121816] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center shadow-lg"
+                    className="px-4 sm:px-6 py-3 rounded-full bg-[#C8B195] text-[#121816] hover:bg-[#FAF6EE] hover:text-[#121816] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center shadow-lg"
                     data-cursor-text="EXPLORE PROJECTS"
                   >
                     View Projects
                   </a>
                   <a 
                     href="#contact" 
-                    className="px-6 py-3 rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center bg-[#1a2220]/20"
+                    className="px-4 sm:px-6 py-3 rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center bg-[#1a2220]/20"
                     data-cursor-text="LET'S CONNECT"
                   >
                     Connect
@@ -698,7 +706,7 @@ export default function Home() {
               </div>
 
               {/* stats display */}
-              <div className="bg-[#1a2220]/75 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl grid grid-cols-3 gap-6 sm:gap-10 min-w-[280px] w-full lg:w-auto">
+              <div className="bg-[#1a2220]/95 md:bg-[#1a2220]/75 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl grid grid-cols-3 gap-6 sm:gap-10 min-w-[280px] w-full lg:w-auto">
                 <div className="text-left">
                   <h3 className="text-xl sm:text-2xl font-bold font-display text-[#C8B195] tracking-tight">10.0</h3>
                   <p className="text-[8px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold mt-1">B.E. CGPA</p>
