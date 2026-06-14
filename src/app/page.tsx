@@ -607,7 +607,7 @@ export default function Home() {
         <main className="flex-grow">
 
           {/* Hero Section */}
-          <section id="hero" className="relative min-h-[calc(100vh-96px)] w-full flex flex-col justify-between px-6 py-12 md:py-20 z-10 overflow-hidden border-b border-white/5">
+          <section id="hero" className="relative min-h-[calc(100vh-96px)] w-full flex flex-col justify-between px-6 pt-32 pb-12 md:py-20 z-10 overflow-hidden border-b border-white/5">
           
           {/* Right-aligned dramatic portrait backdrop with seamless blending and centering */}
           <motion.div 
@@ -650,12 +650,12 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="max-w-7xl mx-auto w-full flex flex-col justify-start md:justify-between gap-8 sm:gap-16 md:gap-20 min-h-[calc(100vh-160px)] md:h-full relative z-10">
+          <div className="max-w-7xl mx-auto w-full flex flex-col justify-start md:justify-between gap-8 sm:gap-16 md:gap-20 min-h-[calc(100vh-176px)] md:h-full relative z-10">
             
             {/* Top Track: Tag */}
             <motion.div 
               style={{ y: isMobile ? 0 : heroTitleY1 }}
-              className="w-full flex justify-end items-center pointer-events-none"
+              className="w-full flex justify-start md:justify-end items-center pointer-events-none"
             >
               <span className="text-[9px] font-bold tracking-widest text-[#C8B195] uppercase px-3.5 py-1.5 border border-[#C8B195]/20 rounded-full bg-[#121816]/80 backdrop-blur-md">
                 CO-CURATOR • DEVELOPER
