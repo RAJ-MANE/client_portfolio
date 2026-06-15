@@ -1177,72 +1177,82 @@ export default function Home() {
 
         {/* Experience & Timeline */}
         <section id="experience" className="px-6 py-32 z-10 relative">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-              
-              <div className="lg:col-span-4 sticky top-28">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">03 / EXPERIENCE</span>
-                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
-                  Timeline & <br />
-                  <span className="text-[#8FA89B]">Credentials.</span>
-                </h2>
-                <div className="w-12 h-1 bg-[#C8B195] mt-4" />
-                <p className="text-xs text-[#FAF6EE]/40 mt-6 leading-relaxed max-w-xs uppercase tracking-wider">
-                  Academic projects, community leadership, and hackathon wins.
-                </p>
-              </div>
+          <div className="max-w-3xl mx-auto flex flex-col items-center text-center space-y-16">
+            
+            {/* Section Header */}
+            <div className="flex flex-col items-center text-center w-full">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block w-fit mx-auto">03 / EXPERIENCE</span>
+              <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center">
+                Timeline & <span className="text-[#8FA89B]">Credentials.</span>
+              </h2>
+              <div className="w-12 h-1 bg-[#C8B195] mt-4 mx-auto" />
+              <p className="text-xs text-[#FAF6EE]/40 mt-6 leading-relaxed max-w-md uppercase tracking-wider mx-auto">
+                Academic projects, community leadership, and hackathon wins.
+              </p>
+            </div>
 
-              <div className="lg:col-span-8 space-y-12">
-                
-                <h3 className="text-base font-bold font-display uppercase tracking-widest text-[#C8B195] border-b border-white/5 pb-3 flex items-center gap-3">
+            <div className="w-full space-y-16 flex flex-col items-center">
+              
+              {/* Leadership & Event Roles Section */}
+              <div className="w-full space-y-12 flex flex-col items-center">
+                <h3 className="text-base font-bold font-display uppercase tracking-widest text-[#C8B195] border-b border-white/5 pb-3 flex items-center justify-center gap-3 w-full max-w-xl mx-auto">
                   <FaBriefcase className="text-xs text-[#8FA89B]" />
                   Leadership & Event Roles
                 </h3>
 
-                <div className="relative border-l border-white/10 pl-6 sm:pl-8 space-y-12 ml-1">
+                <div className="space-y-16 w-full max-w-2xl mx-auto flex flex-col items-center">
                   
-                  <div className="relative">
-                    <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#C8B195] border-4 border-[#121816] shadow-xl" />
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                      <h4 className="text-base font-bold text-white uppercase tracking-wider">Co-Curator</h4>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#C8B195]">
+                  {/* Co-Curator */}
+                  <div className="relative flex flex-col items-center text-center w-full">
+                    {/* Centered timeline dot marker */}
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#C8B195] mb-4 border-4 border-[#121816] ring-2 ring-[#C8B195]/20" />
+                    
+                    <div className="flex flex-col items-center justify-center gap-2 mb-2">
+                      <h4 className="text-base font-bold text-white uppercase tracking-wider text-center">Co-Curator</h4>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mx-auto">
                         July 2025 – Present
                       </span>
                     </div>
-                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-4 text-center">
                       TEDxTCET • Mumbai
                     </h5>
-                    <ul className="list-disc list-outside ml-4 space-y-2 text-[#FAF6EE]/60 text-sm leading-relaxed">
+                    <ul className="list-none space-y-3 text-[#FAF6EE]/60 text-sm leading-relaxed max-w-xl mx-auto text-center">
                       <li>Curated and shortlisted speakers with impactful ideas aligned to TEDx themes, maintaining high content quality standards.</li>
                       <li>Collaborated on refining talk narratives and structuring presentations to enhance audience engagement and storytelling.</li>
                     </ul>
                   </div>
 
-                  <div className="relative">
-                    <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#8FA89B] border-4 border-[#121816] shadow-xl" />
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                      <h4 className="text-base font-bold text-white uppercase tracking-wider">Event Coordinator</h4>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#8FA89B]">
+                  {/* Event Coordinator */}
+                  <div className="relative flex flex-col items-center text-center w-full">
+                    {/* Centered timeline dot marker */}
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#8FA89B] mb-4 border-4 border-[#121816] ring-2 ring-[#8FA89B]/20" />
+                    
+                    <div className="flex flex-col items-center justify-center gap-2 mb-2">
+                      <h4 className="text-base font-bold text-white uppercase tracking-wider text-center">Event Coordinator</h4>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#8FA89B] mx-auto">
                         July 2025 – Present
                       </span>
                     </div>
-                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-4 text-center">
                       CSI-TCET • Mumbai
                     </h5>
-                    <ul className="list-disc list-outside ml-4 space-y-2 text-[#FAF6EE]/60 text-sm leading-relaxed">
+                    <ul className="list-none space-y-3 text-[#FAF6EE]/60 text-sm leading-relaxed max-w-xl mx-auto text-center">
                       <li>Successfully planned and executed technical and non-technical events for student members.</li>
                       <li>Contributed to ideation, promotion, and post-event follow-ups, ensuring high participation and engagement.</li>
                     </ul>
                   </div>
 
                 </div>
+              </div>
 
-                <h3 className="text-base font-bold font-display uppercase tracking-widest text-[#C8B195] border-b border-white/5 pt-10 pb-3 flex items-center gap-3">
+              {/* Hackathons & Papers Section */}
+              <div className="w-full space-y-12 flex flex-col items-center">
+                <h3 className="text-base font-bold font-display uppercase tracking-widest text-[#C8B195] border-b border-white/5 pb-3 flex items-center justify-center gap-3 w-full max-w-xl mx-auto">
                   <FaAward className="text-xs text-[#8FA89B]" />
                   Hackathons & Papers
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                   {awardsData.map((award, index) => {
                     const isFlipped = !!flippedCards[index];
                     return (
@@ -1262,24 +1272,24 @@ export default function Home() {
                         >
                           {/* Front Side */}
                           <div 
-                            className="absolute inset-0 w-full h-full bg-[#1a2220]/75 backdrop-blur-md rounded-3xl p-6 border border-white/5 group-hover:border-[#C8B195]/20 transition-all duration-300 flex flex-col justify-between"
+                            className="absolute inset-0 w-full h-full bg-[#1a2220]/75 backdrop-blur-md rounded-3xl p-6 border border-white/5 group-hover:border-[#C8B195]/20 transition-all duration-300 flex flex-col justify-between items-center text-center"
                             style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                           >
-                            <div>
-                              <span className={`text-[9px] font-bold uppercase tracking-widest ${award.bgOpacity} ${award.textColor} px-2.5 py-1 rounded-md w-fit`}>
+                            <div className="flex flex-col items-center text-center">
+                              <span className={`text-[9px] font-bold uppercase tracking-widest ${award.bgOpacity} ${award.textColor} px-2.5 py-1 rounded-md w-fit mx-auto`}>
                                 {award.badge}
                               </span>
-                              <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">
+                              <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide text-center">
                                 {award.title}
                               </h4>
-                              <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">
+                              <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium text-center">
                                 {award.type}
                               </p>
-                              <p className="text-xs text-[#FAF6EE]/60 leading-relaxed line-clamp-3">
+                              <p className="text-xs text-[#FAF6EE]/60 leading-relaxed text-center line-clamp-3">
                                 {award.description}
                               </p>
                             </div>
-                            <span className="text-[8px] font-bold text-[#C8B195]/40 uppercase tracking-widest self-end group-hover:text-[#C8B195] transition-colors mt-2">
+                            <span className="text-[8px] font-bold text-[#C8B195]/40 uppercase tracking-widest group-hover:text-[#C8B195] transition-colors mt-2 text-center">
                               Tap to View Certificate ↗
                             </span>
                           </div>
@@ -1298,7 +1308,7 @@ export default function Home() {
                               alt={`${award.title} Certificate`} 
                               className="w-full h-full object-contain rounded-2xl" 
                             />
-                            <div className="absolute bottom-3 right-4 bg-[#121816]/80 backdrop-blur-sm px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-widest text-[#C8B195]">
+                            <div className="absolute bottom-3 left-0 right-0 mx-auto w-fit bg-[#121816]/80 backdrop-blur-sm px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-widest text-[#C8B195]">
                               Tap to Flip Back
                             </div>
                           </div>
@@ -1307,7 +1317,6 @@ export default function Home() {
                     );
                   })}
                 </div>
-
               </div>
 
             </div>
