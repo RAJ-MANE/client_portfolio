@@ -278,6 +278,7 @@ export default function Home() {
   const [fullscreenLoading, setFullscreenLoading] = useState<{ active: boolean; message: string } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -300,6 +301,13 @@ export default function Home() {
       window.open(url, "_blank", "noopener,noreferrer");
       setFullscreenLoading(null);
     }, 1200);
+  };
+  
+  const toggleCardFlip = (index: number) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
   };
 
   // Context-aware Custom Cursor
@@ -419,6 +427,60 @@ export default function Home() {
     { name: "AI/ML", icon: <FaBrain /> },
     { name: "Web Development", icon: <FaCode /> },
     { name: "Embedded Systems", icon: <FaMicrochip /> },
+  ];
+
+  const awardsData = [
+    {
+      title: "Model Forge 2025",
+      type: "ML Hackathon",
+      badge: "1st Place",
+      badgeColor: "#C8B195",
+      bgOpacity: "bg-[#C8B195]/10",
+      textColor: "text-[#C8B195]",
+      description: "Presented IMPROVYU, an AI model that conducts mock interviews to help users practice facial expressions, eye-contact, speech delivery, and questions.",
+      certificate: "/model forge certificate.jpeg"
+    },
+    {
+      title: "NEXUS AI Challenge",
+      type: "Ideathon 2025",
+      badge: "Winner",
+      badgeColor: "#C8B195",
+      bgOpacity: "bg-[#C8B195]/10",
+      textColor: "text-[#C8B195]",
+      description: "Pitched Renewable Site Optimizer, using OpenStreetMap APIs and geospatial AI to assess land suitability for wind/solar plants.",
+      certificate: "/nexus certificate.jpeg"
+    },
+    {
+      title: "MULTICON EWPCC 2025",
+      type: "Research Award",
+      badge: "Best Research Paper",
+      badgeColor: "#C8B195",
+      bgOpacity: "bg-[#C8B195]/10",
+      textColor: "text-[#C8B195]",
+      description: "Recognized for mathematical analysis in paper: Exploring the Fibonacci–Golden Ratio Connection, evaluating numerical patterns.",
+      certificate: "/research paper certificate.jpeg"
+    },
+    {
+      title: "Java Programming",
+      type: "FOSSEE Certification",
+      badge: "IIT Bombay",
+      badgeColor: "#8FA89B",
+      bgOpacity: "bg-[#8FA89B]/10",
+      textColor: "text-[#8FA89B]",
+      description: "Completed OOP, logic, and data structure structures. Certified with a score of 92.50%.",
+      certificate: "/iit bombay certificate.jpeg"
+    },
+    {
+      title: "Developer Certifications",
+      type: "Database Credentials",
+      badge: "MongoDB Academy",
+      badgeColor: "#8FA89B",
+      bgOpacity: "bg-[#8FA89B]/10",
+      textColor: "text-[#8FA89B]",
+      description: "Completed professional certifications covering MongoDB Transactions, CRUD operations (Insert, Find, Replace, Delete), and Database Connectivity protocols, validating database skills.",
+      certificate: "/mongodb certificate.jpeg",
+      fullWidth: true
+    }
   ];
 
   const projectsData = [
@@ -934,7 +996,13 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
-              <div className="lg:col-span-4 flex flex-col items-start text-left sticky lg:top-28">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-4 flex flex-col items-start text-left sticky lg:top-28"
+              >
                 <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">01 / PERSPECTIVE</span>
                 <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-left">
                   About <br />
@@ -954,9 +1022,15 @@ export default function Home() {
                     <p className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195]/80">Mumbai, India</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
  
-              <div className="lg:col-span-8 flex flex-col space-y-4 md:space-y-8">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-8 flex flex-col space-y-4 md:space-y-8"
+              >
                 <WordReveal 
                   text="I build digital tools by combining mathematical analytics, software structures, and clean visual layouts."
                   className="text-xl sm:text-2xl md:text-3xl font-light text-[#FAF6EE]/90 leading-relaxed font-sans"
@@ -1001,7 +1075,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
           </div>
@@ -1169,52 +1243,69 @@ export default function Home() {
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  
-                  <div className="glass-card rounded-3xl p-6 relative overflow-hidden group border border-white/5 hover:border-[#C8B195]/20 transition-all duration-300">
-                    <span className="text-[9px] font-bold text-[#C8B195] uppercase tracking-widest bg-[#C8B195]/10 px-2.5 py-1 rounded-md">1st Place</span>
-                    <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">Model Forge 2025</h4>
-                    <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">ML Hackathon</p>
-                    <p className="text-xs text-[#FAF6EE]/60 leading-relaxed">
-                      Presented <span className="text-white font-medium">IMPROVYU</span>, an AI model that conducts mock interviews to help users practice facial expressions, eye-contact, speech delivery, and questions.
-                    </p>
-                  </div>
+                  {awardsData.map((award, index) => {
+                    const isFlipped = !!flippedCards[index];
+                    return (
+                      <div 
+                        key={index}
+                        onClick={() => toggleCardFlip(index)}
+                        className={`relative h-[200px] cursor-pointer group [perspective:1000px] ${
+                          award.fullWidth ? "col-span-1 md:col-span-2" : ""
+                        }`}
+                        data-cursor-text="TAP TO FLIP"
+                      >
+                        <motion.div
+                          animate={{ rotateY: isFlipped ? 180 : 0 }}
+                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                          className="w-full h-full relative"
+                          style={{ transformStyle: "preserve-3d" }}
+                        >
+                          {/* Front Side */}
+                          <div 
+                            className="absolute inset-0 w-full h-full bg-[#1a2220]/75 backdrop-blur-md rounded-3xl p-6 border border-white/5 group-hover:border-[#C8B195]/20 transition-all duration-300 flex flex-col justify-between"
+                            style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                          >
+                            <div>
+                              <span className={`text-[9px] font-bold uppercase tracking-widest ${award.bgOpacity} ${award.textColor} px-2.5 py-1 rounded-md w-fit`}>
+                                {award.badge}
+                              </span>
+                              <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">
+                                {award.title}
+                              </h4>
+                              <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">
+                                {award.type}
+                              </p>
+                              <p className="text-xs text-[#FAF6EE]/60 leading-relaxed line-clamp-3">
+                                {award.description}
+                              </p>
+                            </div>
+                            <span className="text-[8px] font-bold text-[#C8B195]/40 uppercase tracking-widest self-end group-hover:text-[#C8B195] transition-colors mt-2">
+                              Tap to View Certificate ↗
+                            </span>
+                          </div>
 
-                  <div className="glass-card rounded-3xl p-6 relative overflow-hidden group border border-white/5 hover:border-[#C8B195]/20 transition-all duration-300">
-                    <span className="text-[9px] font-bold text-[#C8B195] uppercase tracking-widest bg-[#C8B195]/10 px-2.5 py-1 rounded-md">Winner</span>
-                    <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">NEXUS AI Challenge</h4>
-                    <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">Ideathon 2025</p>
-                    <p className="text-xs text-[#FAF6EE]/60 leading-relaxed">
-                      Pitched <span className="text-white font-medium">Renewable Site Optimizer</span>, using OpenStreetMap APIs and geospatial AI to assess land suitability for wind/solar plants.
-                    </p>
-                  </div>
-
-                  <div className="glass-card rounded-3xl p-6 relative overflow-hidden group border border-white/5 hover:border-[#C8B195]/20 transition-all duration-300">
-                    <span className="text-[9px] font-bold text-[#C8B195] uppercase tracking-widest bg-[#C8B195]/10 px-2.5 py-1 rounded-md">Best Research Paper</span>
-                    <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">MULTICON EWPCC 2025</h4>
-                    <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">Research Award</p>
-                    <p className="text-xs text-[#FAF6EE]/60 leading-relaxed">
-                      Recognized for mathematical analysis in paper: <span className="text-white italic">Exploring the Fibonacci–Golden Ratio Connection</span>, evaluating numerical patterns.
-                    </p>
-                  </div>
-
-                  <div className="glass-card rounded-3xl p-6 relative overflow-hidden group border border-white/5 hover:border-[#C8B195]/20 transition-all duration-300">
-                    <span className="text-[9px] font-bold text-[#8FA89B] uppercase tracking-widest bg-[#8FA89B]/10 px-2.5 py-1 rounded-md">IIT Bombay</span>
-                    <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">Java Programming</h4>
-                    <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">FOSSEE Certification</p>
-                    <p className="text-xs text-[#FAF6EE]/60 leading-relaxed">
-                      Completed OOP, logic, and data structure structures. Certified with a score of <span className="text-white font-semibold">92.50%</span>.
-                    </p>
-                  </div>
-
-                  <div className="glass-card rounded-3xl p-6 relative overflow-hidden group border border-white/5 hover:border-[#C8B195]/20 transition-all duration-300 col-span-1 md:col-span-2">
-                    <span className="text-[9px] font-bold text-[#8FA89B] uppercase tracking-widest bg-[#8FA89B]/10 px-2.5 py-1 rounded-md">MongoDB Academy</span>
-                    <h4 className="font-bold text-white mt-4 text-sm uppercase tracking-wide">Developer Certifications</h4>
-                    <p className="text-[10px] text-[#FAF6EE]/40 mb-2 uppercase tracking-widest font-medium">Database Credentials</p>
-                    <p className="text-xs text-[#FAF6EE]/60 leading-relaxed">
-                      Completed professional certifications covering MongoDB Transactions, CRUD operations (Insert, Find, Replace, Delete), and Database Connectivity protocols, validating database skills.
-                    </p>
-                  </div>
-
+                          {/* Back Side (Certificate Image) */}
+                          <div 
+                            className="absolute inset-0 w-full h-full bg-[#1a2220] border border-[#C8B195]/20 rounded-3xl overflow-hidden flex items-center justify-center p-2"
+                            style={{ 
+                              backfaceVisibility: "hidden", 
+                              WebkitBackfaceVisibility: "hidden",
+                              transform: "rotateY(180deg)" 
+                            }}
+                          >
+                            <img 
+                              src={award.certificate} 
+                              alt={`${award.title} Certificate`} 
+                              className="w-full h-full object-contain rounded-2xl" 
+                            />
+                            <div className="absolute bottom-3 right-4 bg-[#121816]/80 backdrop-blur-sm px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-widest text-[#C8B195]">
+                              Tap to Flip Back
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    );
+                  })}
                 </div>
 
               </div>
