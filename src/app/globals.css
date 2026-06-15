@@ -204,3 +204,22 @@ body {
   animation: gradient-flow 6s ease-in-out infinite !important;
 }
 
+/* Squiggly timeline path glow */
+.timeline-path-glow {
+  filter: drop-shadow(0 0 6px rgba(200, 177, 149, 0.3));
+}
+
+/* Premium floating bobbing effect */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+

@@ -42,6 +42,7 @@ import {
 import CurtainLoader from "@/components/CurtainLoader";
 import CircularTestimonials from "@/components/ui/circular-testimonials";
 import { GripVertical, Menu, X } from "lucide-react";
+import SquigglyTimeline from "@/components/SquigglyTimeline";
 
 // 3D Tilt Card Component
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -214,7 +215,7 @@ function ProjectImageSlider({ image1, image2, title }: { image1: string; image2:
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[16/10] w-full h-full overflow-hidden rounded-xl select-none cursor-ew-resize"
+      className="relative aspect-[16/10] w-full overflow-hidden rounded-xl select-none cursor-ew-resize"
       data-cursor-text="DRAG SLIDER"
       onMouseDown={(e) => {
         if (e.button === 0) {
@@ -257,7 +258,7 @@ function ProjectImageSlider({ image1, image2, title }: { image1: string; image2:
         onDragStart={(e) => e.preventDefault()}
         className="absolute left-0 top-0 z-10 w-full h-full object-cover rounded-xl select-none pointer-events-none"
         style={{
-          clipPath: "inset(0 0 0 " + inset + "%)",
+          clipPath: `inset(0% 0% 0% ${inset}%)`,
         }}
       />
       {/* Base Bottom Image */}
@@ -1177,73 +1178,10 @@ export default function Home() {
 
         {/* Experience & Timeline */}
         <section id="experience" className="px-6 py-32 z-10 relative">
-          <div className="max-w-3xl mx-auto flex flex-col items-center text-center space-y-16">
-            
-            {/* Section Header */}
-            <div className="flex flex-col items-center text-center w-full">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block w-fit mx-auto">03 / EXPERIENCE</span>
-              <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center">
-                Timeline & <span className="text-[#8FA89B]">Credentials.</span>
-              </h2>
-              <div className="w-12 h-1 bg-[#C8B195] mt-4 mx-auto" />
-              <p className="text-xs text-[#FAF6EE]/40 mt-6 leading-relaxed max-w-md uppercase tracking-wider mx-auto">
-                Academic projects, community leadership, and hackathon wins.
-              </p>
-            </div>
+          <SquigglyTimeline />
 
+          <div className="max-w-3xl mx-auto mt-24">
             <div className="w-full space-y-16 flex flex-col items-center">
-              
-              {/* Leadership & Event Roles Section */}
-              <div className="w-full space-y-12 flex flex-col items-center">
-                <h3 className="text-base font-bold font-display uppercase tracking-widest text-[#C8B195] border-b border-white/5 pb-3 flex items-center justify-center gap-3 w-full max-w-xl mx-auto">
-                  <FaBriefcase className="text-xs text-[#8FA89B]" />
-                  Leadership & Event Roles
-                </h3>
-
-                <div className="space-y-16 w-full max-w-2xl mx-auto flex flex-col items-center">
-                  
-                  {/* Co-Curator */}
-                  <div className="relative flex flex-col items-center text-center w-full">
-                    {/* Centered timeline dot marker */}
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#C8B195] mb-4 border-4 border-[#121816] ring-2 ring-[#C8B195]/20" />
-                    
-                    <div className="flex flex-col items-center justify-center gap-2 mb-2">
-                      <h4 className="text-base font-bold text-white uppercase tracking-wider text-center">Co-Curator</h4>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mx-auto">
-                        July 2025 – Present
-                      </span>
-                    </div>
-                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-4 text-center">
-                      TEDxTCET • Mumbai
-                    </h5>
-                    <ul className="list-none space-y-3 text-[#FAF6EE]/60 text-sm leading-relaxed max-w-xl mx-auto text-center">
-                      <li>Curated and shortlisted speakers with impactful ideas aligned to TEDx themes, maintaining high content quality standards.</li>
-                      <li>Collaborated on refining talk narratives and structuring presentations to enhance audience engagement and storytelling.</li>
-                    </ul>
-                  </div>
-
-                  {/* Event Coordinator */}
-                  <div className="relative flex flex-col items-center text-center w-full">
-                    {/* Centered timeline dot marker */}
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#8FA89B] mb-4 border-4 border-[#121816] ring-2 ring-[#8FA89B]/20" />
-                    
-                    <div className="flex flex-col items-center justify-center gap-2 mb-2">
-                      <h4 className="text-base font-bold text-white uppercase tracking-wider text-center">Event Coordinator</h4>
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-[9px] font-bold uppercase tracking-widest text-[#8FA89B] mx-auto">
-                        July 2025 – Present
-                      </span>
-                    </div>
-                    <h5 className="text-[#FAF6EE]/70 text-xs font-semibold uppercase tracking-wider mb-4 text-center">
-                      CSI-TCET • Mumbai
-                    </h5>
-                    <ul className="list-none space-y-3 text-[#FAF6EE]/60 text-sm leading-relaxed max-w-xl mx-auto text-center">
-                      <li>Successfully planned and executed technical and non-technical events for student members.</li>
-                      <li>Contributed to ideation, promotion, and post-event follow-ups, ensuring high participation and engagement.</li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
 
               {/* Hackathons & Papers Section */}
               <div className="w-full space-y-12 flex flex-col items-center">
@@ -1353,7 +1291,7 @@ export default function Home() {
                     className="w-full lg:w-1/2 flex flex-col justify-center"
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-15%" }}
+                    viewport={{ once: true, amount: 0.15 }}
                     variants={{
                       hidden: { x: isEven ? -60 : 60, opacity: 0 },
                       visible: { 
@@ -1455,21 +1393,21 @@ export default function Home() {
                     className="w-full lg:w-1/2 flex justify-center"
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-15%" }}
+                    viewport={{ once: true, amount: 0.15 }}
                     variants={{
                       hidden: {
-                        clipPath: isEven ? "inset(0% 100% 0% 0%)" : "inset(0% 0% 0% 100%)",
-                        scale: 1.05,
+                        x: isEven ? 50 : -50,
+                        scale: 0.95,
                         opacity: 0
                       },
                       visible: {
-                        clipPath: "inset(0% 0% 0% 0%)",
+                        x: 0,
                         scale: 1,
                         opacity: 1,
                         transition: {
                           duration: 0.9,
                           ease: [0.16, 1, 0.3, 1],
-                          scale: { duration: 1.4, ease: [0.16, 1, 0.3, 1] }
+                          scale: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
                         }
                       }
                     }}
@@ -1564,8 +1502,8 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-[9px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold">Write me</p>
-                      <a href="mailto:ananya.kalia@email.com" className="text-sm font-bold text-white hover:text-[#C8B195] transition-colors">
-                        ananya.kalia@email.com
+                      <a href="mailto:ananyakalia2704@gmail.com" className="text-sm font-bold text-white hover:text-[#C8B195] transition-colors">
+                        ananyakalia2704@gmail.com
                       </a>
                     </div>
                   </div>
@@ -1596,7 +1534,16 @@ export default function Home() {
 
               <div className="lg:col-span-7">
                 <form 
-                  onSubmit={(e) => e.preventDefault()}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const name = (document.getElementById("name") as HTMLInputElement)?.value || "";
+                    const email = (document.getElementById("email") as HTMLInputElement)?.value || "";
+                    const subject = (document.getElementById("subject") as HTMLInputElement)?.value || "";
+                    const message = (document.getElementById("message") as HTMLTextAreaElement)?.value || "";
+                    
+                    const mailtoUrl = `mailto:ananyakalia2704@gmail.com?subject=${encodeURIComponent(subject || "Portfolio Contact")}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                    window.location.href = mailtoUrl;
+                  }}
                   className="glass-card rounded-3xl p-8 sm:p-10 space-y-6 border border-white/5"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
