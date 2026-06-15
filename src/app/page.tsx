@@ -89,29 +89,50 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-// Fade in word-by-word animation
+// Fade in word-by-word animation using parent-child variants for efficiency and reliability
 function WordReveal({ text, className }: { text: string; className?: string }) {
   const words = text.split(" ");
+  
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.02,
+      }
+    }
+  };
+
+  const wordVariants = {
+    hidden: { y: "100%", opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+      }
+    }
+  };
+
   return (
-    <p className={className}>
+    <motion.p 
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+      className={className}
+    >
       {words.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden mr-1.5 py-0.5">
           <motion.span
-            initial={{ y: "100%", opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{
-              duration: 0.45,
-              ease: [0.215, 0.61, 0.355, 1],
-              delay: 0.01 * i,
-            }}
+            variants={wordVariants}
             className="inline-block"
           >
             {word}
           </motion.span>
         </span>
       ))}
-    </p>
+    </motion.p>
   );
 }
 // Infinite Marquee Row Component
@@ -913,16 +934,16 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
-              <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left sticky lg:top-28">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block w-fit">01 / PERSPECTIVE</span>
-                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center lg:text-left">
-                  About <br className="hidden lg:block" />
+              <div className="lg:col-span-4 flex flex-col items-start text-left sticky lg:top-28">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">01 / PERSPECTIVE</span>
+                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-left">
+                  About <br />
                   <span className="text-[#8FA89B]">Myself.</span>
                 </h2>
-                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8 mx-auto lg:mx-0" />
+                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8" />
                 
                 {/* Portrait Photo */}
-                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mx-auto lg:mx-0 mb-8 lg:mb-0">
+                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mb-8 lg:mb-0">
                   <img 
                     src="/ananya_real.jpg" 
                     alt="Ananya Kalia Portrait" 
@@ -934,14 +955,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
-              <div className="lg:col-span-8 flex flex-col space-y-8">
+ 
+              <div className="lg:col-span-8 flex flex-col space-y-4 md:space-y-8">
                 <WordReveal 
                   text="I build digital tools by combining mathematical analytics, software structures, and clean visual layouts."
-                  className="text-2xl sm:text-3xl font-light text-[#FAF6EE]/90 leading-relaxed font-sans"
+                  className="text-xl sm:text-2xl md:text-3xl font-light text-[#FAF6EE]/90 leading-relaxed font-sans"
                 />
                 
-                <div className="h-[1px] bg-white/10 my-4" />
+                <div className="h-[1px] bg-white/10 my-2 md:my-4" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-[#FAF6EE]/60 text-sm leading-relaxed">
                   <div className="space-y-4">
