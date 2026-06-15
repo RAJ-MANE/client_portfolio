@@ -911,18 +911,18 @@ export default function Home() {
         {/* About Section */}
         <section id="about" className="px-6 pt-16 pb-32 md:py-32 z-10 relative">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
               
-              <div className="lg:col-span-4 sticky top-28">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">01 / PERSPECTIVE</span>
-                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
-                  About <br />
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left sticky lg:top-28">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block w-fit">01 / PERSPECTIVE</span>
+                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center lg:text-left">
+                  About <br className="hidden lg:block" />
                   <span className="text-[#8FA89B]">Myself.</span>
                 </h2>
-                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8" />
+                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8 mx-auto lg:mx-0" />
                 
                 {/* Portrait Photo */}
-                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mx-auto lg:mx-0">
+                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mx-auto lg:mx-0 mb-8 lg:mb-0">
                   <img 
                     src="/ananya_real.jpg" 
                     alt="Ananya Kalia Portrait" 
