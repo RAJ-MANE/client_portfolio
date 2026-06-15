@@ -772,12 +772,19 @@ export default function Home() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="w-[80vw] max-w-[320px] aspect-[3/4] rounded-2xl overflow-hidden border border-[#C8B195]/20 shadow-2xl mx-auto"
+              className="relative w-[80vw] max-w-[320px] aspect-[3/4] mx-auto overflow-hidden pointer-events-none"
             >
               <img 
                 src="/ananya_hero.jpg" 
                 alt="Ananya Kalia" 
                 className="w-full h-full object-cover"
+              />
+              {/* Vignette / Edge blend overlay for mobile hero image to blend it with background */}
+              <div 
+                className="absolute inset-0 pointer-events-none" 
+                style={{ 
+                  background: 'radial-gradient(circle at center, transparent 35%, rgba(18,24,22,0.4) 65%, #121816 95%), linear-gradient(to bottom, transparent 60%, #121816 100%), linear-gradient(to top, transparent 80%, #121816 100%)' 
+                }} 
               />
             </motion.div>
 
@@ -915,14 +922,14 @@ export default function Home() {
                 <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8" />
                 
                 {/* Portrait Photo */}
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group">
+                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mx-auto lg:mx-0">
                   <img 
                     src="/ananya_real.jpg" 
                     alt="Ananya Kalia Portrait" 
-                    className="w-full aspect-[3/4] object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#121816]/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
+                  <div className="absolute bottom-4 left-0 right-0 text-center">
                     <p className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195]/80">Mumbai, India</p>
                   </div>
                 </div>
