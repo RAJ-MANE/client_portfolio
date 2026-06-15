@@ -783,7 +783,7 @@ export default function Home() {
               <div 
                 className="absolute inset-0 pointer-events-none" 
                 style={{ 
-                  background: 'radial-gradient(circle at center, transparent 35%, rgba(18,24,22,0.4) 65%, #121816 95%), linear-gradient(to bottom, transparent 60%, #121816 100%), linear-gradient(to top, transparent 80%, #121816 100%)' 
+                  background: 'radial-gradient(circle at center, transparent 35%, rgba(18,24,22,0.4) 65%, #121816 95%), linear-gradient(to bottom, transparent 60%, #121816 100%), linear-gradient(to top, transparent 80%, #121816 100%), linear-gradient(to right, #121816 0%, transparent 15%, transparent 85%, #121816 100%)' 
                 }} 
               />
             </motion.div>
