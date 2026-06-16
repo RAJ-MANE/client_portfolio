@@ -240,9 +240,9 @@ export default function SquigglyTimeline() {
     <div
       ref={cardRef}
       className={`
-        group relative max-w-lg w-full md:h-full
+        group relative max-w-lg w-full md:h-full min-w-0
         bg-[#1a2220]/50 backdrop-blur-md
-        rounded-3xl p-6 md:p-8
+        rounded-3xl p-5 md:p-8
         border border-white/[0.04] hover:border-[#C8B195]/15
         transition-all duration-500
         hover:bg-[#1a2220]/70
@@ -250,7 +250,7 @@ export default function SquigglyTimeline() {
         flex flex-col justify-center
       `}
     >
-      <div className="flex flex-col gap-4 items-start w-full">
+      <div className="flex flex-col gap-4 items-start w-full min-w-0">
         {/* Mobile Logo inside card */}
         <div className="flex-shrink-0 md:hidden">
           <div className="w-16 h-16 rounded-2xl bg-white/95 p-3 flex items-center justify-center overflow-hidden shadow-lg shadow-black/20">
@@ -259,7 +259,7 @@ export default function SquigglyTimeline() {
         </div>
         {/* Text Content */}
         <div
-          className={`flex-1 flex flex-col items-start text-left w-full ${
+          className={`flex-1 flex flex-col items-start text-left w-full min-w-0 ${
             isEven ? "md:items-end md:text-right" : "md:items-start md:text-left"
           }`}
         >
@@ -272,13 +272,13 @@ export default function SquigglyTimeline() {
           >
             {m.date}
           </span>
-          <h4 className="text-base md:text-lg lg:text-xl font-bold font-display text-white uppercase tracking-wider mb-1.5 group-hover:text-[#C8B195] transition-colors duration-300">
+          <h4 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold font-display text-white uppercase tracking-wider mb-1.5 group-hover:text-[#C8B195] transition-colors duration-300 break-words w-full">
             {m.title}
           </h4>
-          <p className="text-[10px] md:text-xs text-[#FAF6EE]/50 uppercase tracking-widest font-semibold mb-3">
+          <p className="text-[10px] md:text-xs text-[#FAF6EE]/50 uppercase tracking-widest font-semibold mb-3 break-words w-full">
             {m.org} • {m.location}
           </p>
-          <p className="text-xs md:text-sm text-[#FAF6EE]/60 leading-relaxed font-sans">
+          <p className="text-xs md:text-sm text-[#FAF6EE]/60 leading-relaxed font-sans break-words w-full">
             {m.description}
           </p>
           {m.isActive && (
@@ -314,7 +314,7 @@ export default function SquigglyTimeline() {
         <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">
           03 / EXPERIENCE
         </span>
-        <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center">
           Timeline &amp; <span className="text-[#8FA89B]">Credentials.</span>
         </h2>
         <div className="w-12 h-1 bg-[#C8B195] mt-4 mx-auto" />
@@ -359,7 +359,7 @@ export default function SquigglyTimeline() {
         {/* Mobile vertical line */}
         <div
           ref={mobileLineRef}
-          className="md:hidden absolute left-[31px] top-0 bottom-0 w-[2px] z-0"
+          className="md:hidden absolute left-[23px] top-0 bottom-0 w-[2px] z-0"
           style={{
             background:
               "linear-gradient(to bottom, transparent 0%, rgba(200,177,149,0.35) 10%, rgba(200,177,149,0.35) 90%, transparent 100%)",
@@ -380,7 +380,7 @@ export default function SquigglyTimeline() {
                 <div
                   className={`
                     flex-1 md:flex-initial md:w-[calc(50%-32px)] md:h-full
-                    order-2 md:order-1
+                    order-2 md:order-1 min-w-0
                     pl-2 md:pl-0 flex md:justify-end justify-start md:items-center
                   `}
                 >
@@ -403,7 +403,7 @@ export default function SquigglyTimeline() {
                 </div>
 
                 {/* ── Dot ── */}
-                <div className="flex-shrink-0 w-16 flex justify-center order-first md:order-2 z-10">
+                <div className="flex-shrink-0 w-12 md:w-16 flex justify-center order-first md:order-2 z-10">
                   <div
                     ref={(el) => {
                       dotRefs.current[i] = el;

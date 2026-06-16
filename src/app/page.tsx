@@ -243,6 +243,7 @@ function ProjectImageSlider({ image1, image2, title }: { image1: string; image2:
       >
         {/* Slider Button Handle */}
         <button
+          suppressHydrationWarning={true}
           className="bg-[#C8B195] text-[#121816] rounded hover:scale-110 active:scale-95 transition-all w-5.5 h-9 select-none -translate-y-1/2 absolute top-1/2 -ml-2.75 z-30 cursor-ew-resize flex justify-center items-center shadow-[0_0_15px_rgba(200,177,149,0.3)] border border-[#C8B195]/20"
           aria-label="Drag to compare"
           type="button"
@@ -256,7 +257,9 @@ function ProjectImageSlider({ image1, image2, title }: { image1: string; image2:
         alt={`${title} - View A`}
         draggable="false"
         onDragStart={(e) => e.preventDefault()}
-        className="absolute left-0 top-0 z-10 w-full h-full object-cover rounded-xl select-none pointer-events-none"
+        className={`absolute left-0 top-0 z-10 w-full h-full rounded-xl select-none pointer-events-none ${
+          (title.toLowerCase().includes("research") || title.toLowerCase().includes("certificate") || image1.includes("research") || image1.includes("certificate") || image1.includes("iit")) ? "object-contain bg-[#17201d]" : "object-cover"
+        }`}
         style={{
           clipPath: `inset(0% 0% 0% ${inset}%)`,
         }}
@@ -267,7 +270,9 @@ function ProjectImageSlider({ image1, image2, title }: { image1: string; image2:
         alt={`${title} - View B`}
         draggable="false"
         onDragStart={(e) => e.preventDefault()}
-        className="absolute left-0 top-0 w-full h-full object-cover rounded-xl select-none pointer-events-none"
+        className={`absolute left-0 top-0 w-full h-full rounded-xl select-none pointer-events-none ${
+          (title.toLowerCase().includes("research") || title.toLowerCase().includes("certificate") || image2.includes("research") || image2.includes("certificate") || image2.includes("iit")) ? "object-contain bg-[#17201d]" : "object-cover"
+        }`}
       />
     </div>
   );
@@ -289,13 +294,27 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleRedirect = (e: React.MouseEvent<HTMLAnchorElement>, type: "demo" | "github", url: string) => {
+  const handleRedirect = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, 
+    type: "demo" | "github" | "linkedin", 
+    url: string
+  ) => {
     e.preventDefault();
     if (fullscreenLoading) return;
     
+    let message = "Opening Link...";
+    if (type === "demo") message = "Connecting to Live Demo...";
+    else if (type === "github") {
+      message = url.includes("/projects") || url.includes("/RAJ-MANE") || url.endsWith(".git") 
+        ? "Opening GitHub Repository..." 
+        : "Opening GitHub Profile...";
+    } else if (type === "linkedin") {
+      message = "Opening LinkedIn Profile...";
+    }
+    
     setFullscreenLoading({
       active: true,
-      message: type === "demo" ? "Connecting to Live Demo..." : "Opening GitHub Repository..."
+      message
     });
     
     setTimeout(() => {
@@ -374,24 +393,24 @@ export default function Home() {
   const testimonials = [
     {
       quote:
-        "Ananya brought exceptional depth to TEDxTCET as Co-Curator. Her capacity to refine complex ideas and structural narratives into highly engaging presentations significantly elevated our speaker standards.",
-      name: "Ayush Shah",
-      designation: "Lead Organizer, TEDxTCET",
-      src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+        "Ananya's analytical insight and mathematical rigor during our research collaboration were outstanding. Her work on the Fibonacci-Golden Ratio connection demonstrated exceptional research acumen and academic excellence.",
+      name: "Mariyam Khan",
+      designation: "Assistant Professor TCET, Faculty guide for our research paper",
+      src: "/peer1.jpeg",
     },
     {
       quote:
-        "IMPROVYU, presented at the Model Forge 2025 competition, was a masterclass in applying computer vision and machine learning (OpenCV/MediaPipe) to solve a tangible human problem. Ananya's software craftsmanship is top-tier.",
-      name: "Dr. Sandip Kumar",
-      designation: "Lead AI Judge, Model Forge 2025",
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+        "As a Co-Curator, Ananya displayed excellent leadership and organizational skills. Her ability to coordinate speakers and curate compelling narratives was instrumental to the success of TEDxTCET.",
+      name: "Tabrez Tisekar",
+      designation: "Ex Curator TEDxTCET, AIDS Engineer TCET",
+      src: "/peer2.jpeg",
     },
     {
       quote:
-        "Her event coordination at CSI-TCET was marked by efficiency and high engagement. Ananya combines technical aptitude with structured management skills, making her a natural leader and developer.",
-      name: "Pranav Patil",
-      designation: "President, CSI-TCET",
-      src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+        "Ananya stands out as a highly motivated developer who excels at transforming theoretical concepts into working systems. Her engineering work on projects like IMPROVYU and GIS optimization is top-tier.",
+      name: "Preksha Pareekh",
+      designation: "Professor computer department TCET, mentor supported in various projects",
+      src: "/peer 3.jpeg",
     },
   ];
 
@@ -490,44 +509,42 @@ export default function Home() {
       award: "Winner, Model Forge 2025 ML",
       description: "An advanced computer vision AI that conducts mock interviews. Leverages MediaPipe and OpenCV to evaluate facial postures, speech timing, and response structures in real-time.",
       tags: ["Python", "OpenCV", "MediaPipe", "AI/ML", "Flask"],
-      image: "/improvyu.png",
-      image1: "/improvyu.png",
-      image2: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
+      image: "/improvyu1.png",
+      image1: "/improvyu1.png",
+      image2: "/improvu2.png",
       liveLink: "https://improvyu.demo",
-      githubLink: "https://github.com/ananyakalia14/improvyu"
+      githubLink: "https://github.com/RAJ-MANE/MODEL_FORGE.git"
     },
     {
       title: "Renewable Site Optimizer",
       award: "Winner, NEXUS Ideathon 2025",
       description: "A GIS and AI-powered web dashboard assessing topological and spatial suitability for wind and solar installations using OpenStreetMap algorithms.",
       tags: ["Flask", "OpenStreetMap", "TensorFlow", "NumPy", "Figma"],
-      image: "/optimizer.png",
-      image1: "/optimizer.png",
-      image2: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800&auto=format&fit=crop",
+      image: "/renewable1.jpeg",
+      image1: "/renewable1.jpeg",
+      image2: "/renewable2.png",
       liveLink: "https://ai-sun-wind-planner.vercel.app",
-      githubLink: "https://github.com/ananyakalia14/renewable-site-optimizer"
+      githubLink: "https://github.com/RAJ-MANE/Renewable_Site_Optimizer.git"
     },
     {
       title: "Fibonacci-Golden Ratio Research",
       award: "Winner, Best Paper MULTICON 2025",
       description: "A mathematical analysis paper assessing structural connections between Golden Ratio divisions and Fibonacci iterations, recognized for analytical insight.",
       tags: ["Python", "Analytical Modeling", "Research", "Fibonacci"],
-      image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop",
-      image1: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop",
-      image2: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800&auto=format&fit=crop",
-      liveLink: "https://www.researchgate.net/publication/405140073_The_Golden_Link_Exploring_the_Fibonacci-_Golden_Ratio_Connection",
-      githubLink: "https://github.com/ananyakalia14/fibonacci-golden-ratio"
+      image: "/research_img1.jpeg",
+      image1: "/research_img1.jpeg",
+      image2: "/research_img2.jpeg",
+      liveLink: "https://www.researchgate.net/publication/405140073_The_Golden_Link_Exploring_the_Fibonacci-_Golden_Ratio_Connection"
     },
     {
       title: "C++ & Java Core Systems",
       award: "IIT Bombay FOSSEE Certification",
       description: "Intermediate and advanced implementations of Object-Oriented structures, custom memory allocations, and algorithms. Scoring a verified 92.50%.",
       tags: ["C++", "Java", "Data Structures", "OOP", "IIT Bombay"],
-      image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop",
-      image1: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop",
-      image2: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
-      liveLink: "https://systems-oop.demo",
-      githubLink: "https://github.com/ananyakalia14/core-systems-oop"
+      image: "/java_p1.png",
+      image1: "/java_p1.png",
+      image2: "/java_p2.png",
+      githubLink: "https://github.com/ananyakalia14/SnakeGame-Java-Web.git"
     }
   ];
 
@@ -655,13 +672,28 @@ export default function Home() {
               <a href="#projects" data-cursor-text="PROJECTS" className="hover:text-[#C8B195] transition-colors">Projects</a>
               <a href="#testimonials" data-cursor-text="REVIEWS" className="hover:text-[#C8B195] transition-colors">Testimonials</a>
               <a href="#contact" data-cursor-text="LET'S TALK" className="hover:text-[#C8B195] transition-colors">Contact</a>
+              <a 
+                href="https://github.com/ananyakalia14" 
+                onClick={(e) => handleRedirect(e, "github", "https://github.com/ananyakalia14")}
+                data-cursor-text="GITHUB" 
+                className="hover:text-[#C8B195] transition-colors"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                onClick={(e) => handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android")}
+                data-cursor-text="LINKEDIN" 
+                className="hover:text-[#C8B195] transition-colors"
+              >
+                LinkedIn
+              </a>
             </nav>
 
             <div className="flex items-center space-x-4">
               <a 
                 href="https://github.com/ananyakalia14" 
-                target="_blank" 
-                rel="noreferrer" 
+                onClick={(e) => handleRedirect(e, "github", "https://github.com/ananyakalia14")}
                 className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
                 aria-label="GitHub"
                 data-cursor-text="GITHUB"
@@ -670,8 +702,7 @@ export default function Home() {
               </a>
               <a 
                 href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
-                target="_blank" 
-                rel="noreferrer" 
+                onClick={(e) => handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android")}
                 className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
                 aria-label="LinkedIn"
                 data-cursor-text="LINKEDIN"
@@ -738,7 +769,27 @@ export default function Home() {
                     <a href="#experience" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Experience</a>
                     <a href="#projects" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Projects</a>
                     <a href="#testimonials" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Testimonials</a>
-                    <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors">Contact</a>
+                    <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Contact</a>
+                    <a 
+                      href="https://github.com/ananyakalia14" 
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        handleRedirect(e, "github", "https://github.com/ananyakalia14");
+                      }} 
+                      className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]"
+                    >
+                      GitHub
+                    </a>
+                    <a 
+                      href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=via_profile&utm_content=profile&utm_medium=member_android" 
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=via_profile&utm_content=profile&utm_medium=member_android");
+                      }} 
+                      className="hover:text-[#C8B195] py-2 transition-colors"
+                    >
+                      LinkedIn
+                    </a>
                   </nav>
                 </div>
 
@@ -754,16 +805,20 @@ export default function Home() {
                   <div className="flex justify-center space-x-6 pt-2">
                     <a
                       href="https://github.com/ananyakalia14"
-                      target="_blank"
-                      rel="noreferrer"
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        handleRedirect(e, "github", "https://github.com/ananyakalia14");
+                      }}
                       className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
                     >
                       <FaGithub />
                     </a>
                     <a
                       href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                      target="_blank"
-                      rel="noreferrer"
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android");
+                      }}
                       className="text-[#FAF6EE]/60 hover:text-[#C8B195] text-base transition-colors"
                     >
                       <FaLinkedin />
@@ -1002,17 +1057,17 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:col-span-4 flex flex-col items-start text-left sticky lg:top-28"
+                className="lg:col-span-4 flex flex-col items-center text-center sticky lg:top-28 w-full"
               >
                 <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">01 / PERSPECTIVE</span>
-                <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-left">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] text-center">
                   About <br />
                   <span className="text-[#8FA89B]">Myself.</span>
                 </h2>
-                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8" />
+                <div className="w-12 h-1 bg-[#C8B195] mt-4 mb-8 mx-auto" />
                 
                 {/* Portrait Photo */}
-                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mb-8 lg:mb-0">
+                <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] group mb-8 lg:mb-0 mx-auto">
                   <img 
                     src="/ananya_real.jpg" 
                     alt="Ananya Kalia Portrait" 
@@ -1143,7 +1198,7 @@ export default function Home() {
             {/* Title Block */}
             <div className="text-center max-w-2xl mx-auto mb-20">
               <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">02 / COMPETENCY</span>
-              <h2 className="text-4xl sm:text-5xl font-display font-black uppercase tracking-tighter text-[#FAF6EE]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase tracking-tighter text-[#FAF6EE]">
                 TECH ECOSYSTEM
               </h2>
               <p className="text-xs text-[#FAF6EE]/60 uppercase tracking-widest font-bold mt-3">
@@ -1267,7 +1322,7 @@ export default function Home() {
           <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between">
             <div>
               <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">04 / WORKS</span>
-              <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
                 Featured Projects
               </h2>
               <div className="w-12 h-1 bg-[#C8B195] mt-4" />
@@ -1349,24 +1404,28 @@ export default function Home() {
                       }}
                       className="flex flex-wrap gap-4 mb-8"
                     >
-                      <a 
-                        href={project.liveLink}
-                        onClick={(e) => handleRedirect(e, "demo", project.liveLink)}
-                        className="bg-[#C8B195] hover:bg-[#b09b82] text-[#121816] font-bold uppercase tracking-widest text-[9px] sm:text-[10px] px-6 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg hover:shadow-[#C8B195]/10"
-                        data-cursor-text="VISIT DEMO"
-                      >
-                        <span>Live Demo</span>
-                        <FaExternalLinkAlt className="text-[8px] sm:text-[9px]" />
-                      </a>
-                      <a 
-                        href={project.githubLink}
-                        onClick={(e) => handleRedirect(e, "github", project.githubLink)}
-                        className="border border-white/10 hover:border-white/30 bg-white/5 text-white hover:bg-white/10 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] px-6 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg"
-                        data-cursor-text="VIEW REPO"
-                      >
-                        <FaGithub className="text-[12px] sm:text-[13px]" />
-                        <span>GitHub</span>
-                      </a>
+                      {project.liveLink && (
+                        <a 
+                          href={project.liveLink}
+                          onClick={(e) => handleRedirect(e, "demo", project.liveLink)}
+                          className="bg-[#C8B195] hover:bg-[#b09b82] text-[#121816] font-bold uppercase tracking-widest text-[9px] sm:text-[10px] px-6 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg hover:shadow-[#C8B195]/10"
+                          data-cursor-text="VISIT DEMO"
+                        >
+                          <span>Live Demo</span>
+                          <FaExternalLinkAlt className="text-[8px] sm:text-[9px]" />
+                        </a>
+                      )}
+                      {project.githubLink && (
+                        <a 
+                          href={project.githubLink}
+                          onClick={(e) => handleRedirect(e, "github", project.githubLink)}
+                          className="border border-white/10 hover:border-white/30 bg-white/5 text-white hover:bg-white/10 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] px-6 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg"
+                          data-cursor-text="VIEW REPO"
+                        >
+                          <FaGithub className="text-[12px] sm:text-[13px]" />
+                          <span>GitHub</span>
+                        </a>
+                      )}
                     </motion.div>
 
                     {/* Tags */}
@@ -1449,7 +1508,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto flex flex-col items-center">
             <div className="text-center max-w-xl mx-auto mb-16">
               <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">05 / FEEDBACK</span>
-              <h2 className="text-4xl sm:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE]">
                 Peer Endorsements
               </h2>
               <div className="w-12 h-1 bg-[#C8B195] mx-auto mt-4" />
@@ -1486,7 +1545,7 @@ export default function Home() {
               <div className="lg:col-span-5 flex flex-col justify-between">
                 <div>
                   <span className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] mb-2 block">06 / CONNECT</span>
-                  <h2 className="text-4xl sm:text-6xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] leading-none mb-6">
+                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-bold uppercase tracking-tighter text-[#FAF6EE] leading-none mb-6">
                     Let&apos;s Create <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C8B195] to-[#8FA89B]">Impact.</span>
                   </h2>
@@ -1514,7 +1573,11 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-[9px] text-[#FAF6EE]/40 uppercase tracking-widest font-bold">Connect</p>
-                      <a href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" className="text-sm font-bold text-white hover:text-[#C8B195] transition-colors">
+                      <a 
+                        href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                        onClick={(e) => handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android")}
+                        className="text-sm font-bold text-white hover:text-[#C8B195] transition-colors"
+                      >
                         linkedin.com/in/ananya-kalia-9609b3333
                       </a>
                     </div>
@@ -1542,7 +1605,17 @@ export default function Home() {
                     const message = (document.getElementById("message") as HTMLTextAreaElement)?.value || "";
                     
                     const mailtoUrl = `mailto:ananyakalia2704@gmail.com?subject=${encodeURIComponent(subject || "Portfolio Contact")}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-                    window.location.href = mailtoUrl;
+                    
+                    if (fullscreenLoading) return;
+                    setFullscreenLoading({
+                      active: true,
+                      message: "Preparing email client..."
+                    });
+                    
+                    setTimeout(() => {
+                      window.location.href = mailtoUrl;
+                      setFullscreenLoading(null);
+                    }, 1200);
                   }}
                   className="glass-card rounded-3xl p-8 sm:p-10 space-y-6 border border-white/5"
                 >
@@ -1550,6 +1623,7 @@ export default function Home() {
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-[9px] font-bold uppercase tracking-widest text-[#FAF6EE]/60">Full Name</label>
                       <input 
+                        suppressHydrationWarning={true}
                         type="text" 
                         id="name" 
                         placeholder="John Doe" 
@@ -1560,6 +1634,7 @@ export default function Home() {
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-[9px] font-bold uppercase tracking-widest text-[#FAF6EE]/60">Email Address</label>
                       <input 
+                        suppressHydrationWarning={true}
                         type="email" 
                         id="email" 
                         placeholder="john@example.com" 
@@ -1572,6 +1647,7 @@ export default function Home() {
                   <div className="space-y-2">
                     <label htmlFor="subject" className="text-[9px] font-bold uppercase tracking-widest text-[#FAF6EE]/60">Subject</label>
                     <input 
+                      suppressHydrationWarning={true}
                       type="text" 
                       id="subject" 
                       placeholder="Collaboration opportunity" 
@@ -1583,6 +1659,7 @@ export default function Home() {
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-[9px] font-bold uppercase tracking-widest text-[#FAF6EE]/60">Message</label>
                     <textarea 
+                      suppressHydrationWarning={true}
                       id="message" 
                       rows={5}
                       placeholder="Discuss details..." 
@@ -1592,6 +1669,7 @@ export default function Home() {
                   </div>
 
                   <button 
+                    suppressHydrationWarning={true}
                     type="submit" 
                     className="w-full py-4 rounded-2xl bg-[#C8B195] text-[#121816] hover:bg-[#FAF6EE] text-[10px] font-bold uppercase tracking-widest transition-all duration-300 shadow-xl border border-white/5 cursor-pointer animate-pulse"
                     data-cursor-text="SEND"
@@ -1645,8 +1723,7 @@ export default function Home() {
                   <li>
                     <a 
                       href="https://github.com/ananyakalia14" 
-                      target="_blank" 
-                      rel="noreferrer" 
+                      onClick={(e) => handleRedirect(e, "github", "https://github.com/ananyakalia14")}
                       className="hover:text-[#C8B195] transition-colors flex items-center gap-1.5"
                     >
                       <FaGithub /> GitHub
@@ -1655,8 +1732,7 @@ export default function Home() {
                   <li>
                     <a 
                       href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
-                      target="_blank" 
-                      rel="noreferrer" 
+                      onClick={(e) => handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android")}
                       className="hover:text-[#C8B195] transition-colors flex items-center gap-1.5"
                     >
                       <FaLinkedin /> LinkedIn
@@ -1674,6 +1750,7 @@ export default function Home() {
               </p>
               
               <button 
+                suppressHydrationWarning={true}
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 className="text-[9px] font-bold uppercase tracking-widest text-[#C8B195] hover:text-[#FAF6EE] flex items-center gap-1.5 transition-colors cursor-pointer bg-transparent border-none outline-none"
                 data-cursor-text="GO TO TOP"

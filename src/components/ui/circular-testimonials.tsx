@@ -187,7 +187,11 @@ export const CircularTestimonials = ({
               alt={testimonial.name}
               className="testimonial-image"
               data-index={index}
-              style={getImageStyle(index)}
+              style={{
+                ...getImageStyle(index),
+                objectFit: testimonial.src.includes("peer 3") ? "contain" : "cover",
+                backgroundColor: testimonial.src.includes("peer 3") ? "#17201d" : "transparent",
+              }}
             />
           ))}
         </div>
@@ -246,6 +250,7 @@ export const CircularTestimonials = ({
           </AnimatePresence>
           <div className="arrow-buttons">
             <button
+              suppressHydrationWarning={true}
               className="arrow-button prev-button"
               onClick={handlePrev}
               style={{
@@ -258,6 +263,7 @@ export const CircularTestimonials = ({
               <FaArrowLeft size={28} color={colorArrowFg} />
             </button>
             <button
+              suppressHydrationWarning={true}
               className="arrow-button next-button"
               onClick={handleNext}
               style={{
