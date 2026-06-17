@@ -676,22 +676,6 @@ export default function Home() {
               <a href="#testimonials" data-cursor-text="REVIEWS" className="hover:text-[#C8B195] transition-colors">Testimonials</a>
               <a href="#contact" data-cursor-text="LET'S TALK" className="hover:text-[#C8B195] transition-colors">Contact</a>
               <a 
-                href="https://github.com/ananyakalia14" 
-                onClick={(e) => handleRedirect(e, "github", "https://github.com/ananyakalia14")}
-                data-cursor-text="GITHUB" 
-                className="hover:text-[#C8B195] transition-colors"
-              >
-                GitHub
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
-                onClick={(e) => handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=share_via&utm_content=profile&utm_medium=member_android")}
-                data-cursor-text="LINKEDIN" 
-                className="hover:text-[#C8B195] transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a 
                 href="/Ananya_Kalia_1Page_Resume.pdf" 
                 onClick={(e) => handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf")}
                 data-cursor-text="RESUME" 
@@ -782,26 +766,6 @@ export default function Home() {
                     <a href="#projects" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Projects</a>
                     <a href="#testimonials" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Testimonials</a>
                     <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]">Contact</a>
-                    <a 
-                      href="https://github.com/ananyakalia14" 
-                      onClick={(e) => {
-                        setMenuOpen(false);
-                        handleRedirect(e, "github", "https://github.com/ananyakalia14");
-                      }} 
-                      className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]"
-                    >
-                      GitHub
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=via_profile&utm_content=profile&utm_medium=member_android" 
-                      onClick={(e) => {
-                        setMenuOpen(false);
-                        handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=via_profile&utm_content=profile&utm_medium=member_android");
-                      }} 
-                      className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]"
-                    >
-                      LinkedIn
-                    </a>
                     <a 
                       href="/Ananya_Kalia_1Page_Resume.pdf" 
                       onClick={(e) => {
