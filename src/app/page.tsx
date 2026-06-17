@@ -10,7 +10,8 @@ import {
   FaBriefcase, 
   FaMapMarkerAlt, 
   FaArrowRight,
-  FaExternalLinkAlt
+  FaExternalLinkAlt,
+  FaFilePdf
 } from "react-icons/fa";
 import { 
   FaJava, 
@@ -296,7 +297,7 @@ export default function Home() {
 
   const handleRedirect = (
     e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, 
-    type: "demo" | "github" | "linkedin", 
+    type: "demo" | "github" | "linkedin" | "resume", 
     url: string
   ) => {
     e.preventDefault();
@@ -310,6 +311,8 @@ export default function Home() {
         : "Opening GitHub Profile...";
     } else if (type === "linkedin") {
       message = "Opening LinkedIn Profile...";
+    } else if (type === "resume") {
+      message = "Opening Resume...";
     }
     
     setFullscreenLoading({
@@ -688,6 +691,15 @@ export default function Home() {
               >
                 LinkedIn
               </a>
+              <a 
+                href="/Ananya_Kalia_1Page_Resume.pdf" 
+                onClick={(e) => handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf")}
+                data-cursor-text="RESUME" 
+                className="hover:text-[#C8B195] transition-colors"
+                suppressHydrationWarning={true}
+              >
+                Resume
+              </a>
             </nav>
 
             <div className="flex items-center space-x-4">
@@ -786,9 +798,20 @@ export default function Home() {
                         setMenuOpen(false);
                         handleRedirect(e, "linkedin", "https://www.linkedin.com/in/ananya-kalia-9609b3333?utm_source=via_profile&utm_content=profile&utm_medium=member_android");
                       }} 
-                      className="hover:text-[#C8B195] py-2 transition-colors"
+                      className="hover:text-[#C8B195] py-2 transition-colors border-b border-white/[0.02]"
                     >
                       LinkedIn
+                    </a>
+                    <a 
+                      href="/Ananya_Kalia_1Page_Resume.pdf" 
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf");
+                      }} 
+                      className="hover:text-[#C8B195] py-2 transition-colors"
+                      suppressHydrationWarning={true}
+                    >
+                      Resume
                     </a>
                   </nav>
                 </div>
@@ -961,6 +984,14 @@ export default function Home() {
                   View Projects
                 </a>
                 <a 
+                  href="/Ananya_Kalia_1Page_Resume.pdf"
+                  onClick={(e) => handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf")}
+                  className="w-full min-h-[52px] flex items-center justify-center rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[10px] font-bold uppercase tracking-widest transition-all duration-300 bg-[#1a2220]/20"
+                  suppressHydrationWarning={true}
+                >
+                  View Resume
+                </a>
+                <a 
                   href="#contact" 
                   className="w-full min-h-[52px] flex items-center justify-center rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[10px] font-bold uppercase tracking-widest transition-all duration-300 bg-[#1a2220]/20"
                 >
@@ -1015,6 +1046,15 @@ export default function Home() {
                     data-cursor-text="EXPLORE PROJECTS"
                   >
                     View Projects
+                  </a>
+                  <a 
+                    href="/Ananya_Kalia_1Page_Resume.pdf" 
+                    onClick={(e) => handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf")}
+                    className="px-4 sm:px-6 py-3 rounded-full border border-white/10 hover:border-[#C8B195] hover:text-[#C8B195] text-[#FAF6EE] text-[9px] font-bold uppercase tracking-widest transition-all duration-300 text-center bg-[#1a2220]/20"
+                    data-cursor-text="VIEW RESUME"
+                    suppressHydrationWarning={true}
+                  >
+                    View Resume
                   </a>
                   <a 
                     href="#contact" 
@@ -1736,6 +1776,16 @@ export default function Home() {
                       className="hover:text-[#C8B195] transition-colors flex items-center gap-1.5"
                     >
                       <FaLinkedin /> LinkedIn
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="/Ananya_Kalia_1Page_Resume.pdf" 
+                      onClick={(e) => handleRedirect(e, "resume", "/Ananya_Kalia_1Page_Resume.pdf")}
+                      className="hover:text-[#C8B195] transition-colors flex items-center gap-1.5"
+                      suppressHydrationWarning={true}
+                    >
+                      <FaFilePdf /> Resume
                     </a>
                   </li>
                 </ul>
